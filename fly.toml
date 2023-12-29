@@ -3,15 +3,29 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "fly-deployment-latency"
+app = "fly-deployment-latency2"
 primary_region = "sea"
 
 [build]
 
+[deploy]
+strategy = "bluegreen"
+
+
+[[http_service.checks]]
+interval = "7s"
+grace_period = "4s"
+method = "post"
+path = "/health"
+protocol = "http"
+timeout = "5s"
+tls_skip_verify = false
+
+
 [http_service]
-  internal_port = 3000
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ["app"]
+internal_port = 3000
+force_https = true
+auto_stop_machines = true
+auto_start_machines = true
+min_machines_running = 0
+processes = ["app"]
