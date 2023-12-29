@@ -10,15 +10,9 @@ app.use((req, res, next) => {
 })
 
 app.use((req, res) => {
-    res.end('OK') // Respond with "OK" to every request
+    res.end('hello') // Respond with "OK" to every request
 })
 
-setTimeout(
-    () =>
-        app.listen(port, () => {
-            console.log(`Server listening at http://localhost:${port}`)
-        }),
-    1000 * 3,
-)
-
-
+app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`)
+})
